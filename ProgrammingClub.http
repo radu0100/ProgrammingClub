@@ -1,0 +1,6 @@
+@ProgrammingClub_HostAddress = http://localhost:5163
+
+GET {{ProgrammingClub_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
