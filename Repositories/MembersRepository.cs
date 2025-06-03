@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ProgrammingClub.DataContext;
 using ProgrammingClub.Models;
-using System.Xml.Linq;
 
 namespace ProgrammingClub.Repositories
 {
