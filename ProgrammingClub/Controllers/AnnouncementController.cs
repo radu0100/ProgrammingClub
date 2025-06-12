@@ -80,11 +80,5 @@ namespace ProgrammingClub.Controllers
         public void Put(int id, [FromBody] string value)
         {
         }
-
-        // DELETE api/<AnnouncementController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
     }
 }
