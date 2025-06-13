@@ -12,12 +12,12 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-//inregistram clasa ProgrammingClubDataContext in containerul de dependente 
 builder.Services.AddDbContext<ProgrammingClubDataContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-//Transient = de fiecare data cand se cere o instanta a clasei, se va crea una noua
-//Scoped = se va crea o instanta a clasei pentru fiecare request HTTP
+builder.Services.AddDbContext<ProgrammingClubAuthDataContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectionAuth")));
+
 builder.Services.AddTransient<iMembersRepository, MembersRepository>();
 builder.Services.AddTransient<iMembersService, MembersService>();
 

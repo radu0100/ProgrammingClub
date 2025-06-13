@@ -20,7 +20,7 @@ namespace ProgrammingClub.Controllers
             _membersService = membersService;
         }
 
-        // GET: api/<MembersController>
+        // GET api/<MembersController>/1
         [HttpGet]
         public async Task<IActionResult> Get()
         {
@@ -39,18 +39,17 @@ namespace ProgrammingClub.Controllers
             }
         }
 
-        // GET api/<MembersController>/5
-        [HttpGet("{id:guid}")]
+        // GET api by ID/<MembersController>/2
+        [HttpGet("{id}")]
         public async Task<IActionResult> Get(Guid id)
         {
             try
             {
-                var member = await _membersService.GetMemberByIdAsync(id);
+                Member member = await _membersService.GetMemberByIdAsync(id);
                 if (member != null)
-                {
-                    return StatusCode((int)HttpStatusCode.NotFound, ErrorMessagesEnum.MemberNotFound);
-                }
-                return Ok(member);
+                    return StatusCode((int)HttpStatusCode.OK, member);
+                return StatusCode((int)HttpStatusCode.NotFound, ErrorMessagesEnum.MemberNotFound);
+                
             }
             catch (Exception ex)
             {
@@ -58,7 +57,7 @@ namespace ProgrammingClub.Controllers
             }
         }
 
-        // POST api/<MembersController>
+        // POST api/<MembersController>/3
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] Member member)
         {
@@ -78,7 +77,7 @@ namespace ProgrammingClub.Controllers
             }
         }
 
-        // PUT api/<MembersController>/5
+        // PUT api/<MembersController>/4
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(Guid id, [FromBody] Member member)
         {
@@ -103,6 +102,7 @@ namespace ProgrammingClub.Controllers
             }
         }
 
+        // PATCH api/<MembersController>/5
         [HttpPatch("{id}")]
         public async Task<IActionResult> PatchMember(Guid id, [FromBody] UpdateMemberPartially member)
         {
@@ -125,6 +125,7 @@ namespace ProgrammingClub.Controllers
             }
         }
 
+        // DELETE api/<MembersController>/6
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(Guid id)
         {
