@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ProgrammingClub.Migrations
 {
     /// <inheritdoc />
-    public partial class CreatingAuthenticationDatabase : Migration
+    public partial class CreatingAuthDb : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

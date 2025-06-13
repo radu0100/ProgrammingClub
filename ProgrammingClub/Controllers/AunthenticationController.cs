@@ -58,7 +58,7 @@ namespace ProgrammingClub.Controllers
                     var token = _tokenService.CreateToken(identityUser, roles.ToList());
                     var response = new LoginRequestDTO
                     {
-                        Token = token
+                       // Token = token
                     };
                     return Ok(response);
                 }
