@@ -1,9 +1,9 @@
 ﻿using ProgrammingClub.DataContext;
-using ProgrammingClub.Services;
 using ProgrammingClub.Models;
-using ProgrammingClub.Repositories;
 using TechTalk.SpecFlow;
 using Microsoft.EntityFrameworkCore;
+using ProgrammingClub.Services;
+using ProgrammingClub.Repositories;
 
 
 namespace ProgrammingClub.SpecsTests

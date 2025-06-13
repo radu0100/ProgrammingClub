@@ -2,8 +2,8 @@
 using System.Net;
 using ProgrammingClub.Helpers;
 using ProgrammingClub.Models;
-using ProgrammingClub.Services;
 using ProgrammingClub.Models.CreateOrUpdateModels;
+using ProgrammingClub.Services;
 
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860

@@ -1,8 +1,8 @@
 ﻿using ProgrammingClub.Models;
 using ProgrammingClub.DataContext;
-using ProgrammingClub.Repositories;
 using ProgrammingClub.UnitTests.Helpers;
 using ProgrammingClub.UnitTests.Models.Builders;
+using ProgrammingClub.Repositories;
 
 namespace ProgrammingClub.UnitTests.Repositories.Test
 { 
