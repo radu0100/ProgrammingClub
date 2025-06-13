@@ -41,6 +41,29 @@ namespace ProgrammingClub.Controllers
                 return Ok(new { message = "User registered" });
             }
             return BadRequest(result.Errors);
+        }
+
+
+        [HttpPost]
+        [Route("login")]
+        public async Task<IActionResult> Login([FromBody] RegisterRequestDTO loginRequest)
+        {
+            var identityUser = await _userManager.FindByNameAsync(loginRequest.Username);
+            if(identityUser != null)
+            {
+                var checkPassword = await _userManager.CheckPasswordAsync(identityUser, loginRequest.Password);
+                if(checkPassword)
+                {
+                    var roles = await _userManager.GetRolesAsync(identityUser);
+                    var token = _tokenService.CreateToken(identityUser, roles.ToList());
+                    var response = new LoginRequestDTO
+                    {
+                        Token = token
+                    };
+                    return Ok(response);
+                }
             }
+            return Unauthorized(new { message = "Invalid credentials" });
+        }
     }
 }

@@ -69,10 +69,10 @@ builder.Services.AddIdentityCore<IdentityUser>()
 //reguli validare pass
 builder.Services.Configure<IdentityOptions>(options =>
 {
-    options.Password.RequireDigit = true;
+    options.Password.RequireDigit = false;
     options.Password.RequiredLength = 8;
-    options.Password.RequireLowercase = true;
-    options.Password.RequireUppercase = true;
+    options.Password.RequireLowercase = false;
+    options.Password.RequireUppercase = false;
     options.Password.RequiredUniqueChars = 1;
 });
 
