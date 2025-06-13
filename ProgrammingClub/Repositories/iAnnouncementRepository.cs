@@ -6,16 +6,11 @@ namespace ProgrammingClub.Repositories
     {
         Task<IEnumerable<Announcement>> GetAllAnnouncementAsync();
         Task<Announcement> GetAnnouncementByIdAsync(Guid id);
-
-        //Task<Announcement> GetAnnouncementByUsernameAsync(string username);
-
-        Task AddAnnouncementAsync(Announcement Announcement);
-        Task<bool> AnnouncementExistsAsync(string Title);
-
-        //Task UpdateAnnouncementAsync(Announcement Announcement);
-        //Task DeleteAnnouncementAsync(Guid id);
-        //Task<bool> AnnouncementExistsAsync(Guid id);
-        //Task<bool> UsernameExistsAsync(string username);
-
+        Task AddAnnouncementAsync(Announcement announcement);
+        Task<bool> TitleExistsAsync(string title);
+        Task<Announcement> UpdateAnnouncementAsync(Announcement announcement);
+        Task<Announcement> UpdateAnnouncementPartiallyAsync(Announcement announcement);
+        Task<bool> AnnouncementExistAsync(Guid id);
+        Task<bool> DeleteAnnouncementAsync(Guid id);
     }
 }

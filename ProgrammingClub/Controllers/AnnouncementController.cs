@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ProgrammingClub.Helpers;
 using ProgrammingClub.Models;
+using ProgrammingClub.Models.CreateOrUpdateModels;
 using ProgrammingClub.Services;
 using System.Net;
 
@@ -75,10 +76,66 @@ namespace ProgrammingClub.Controllers
             }
         }
 
-        // PUT api/<AnnouncementController>/5
+        // PUT api/<announcementsController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public async Task<IActionResult> Put(Guid id, [FromBody] Announcement announcement)
         {
+            try
+            {
+                if (announcement == null)
+                {
+                    return StatusCode((int)HttpStatusCode.BadRequest, ErrorMessagesEnum.InvalidData);
+                }
+                var updatedannouncement = await _announcementService.UpdateAnnouncementAsync(id, announcement);
+
+                if (updatedannouncement != null)
+                {
+                    return StatusCode((int)HttpStatusCode.OK, SuccessMessagesEnum.AnnouncementUpdated);
+                }
+
+                return StatusCode((int)HttpStatusCode.NotFound, ErrorMessagesEnum.NoAnnouncementFound);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
         }
+
+        [HttpPatch("{id}")]
+        public async Task<IActionResult> PatchAnnouncement(Guid id, [FromBody] UpdateAnnouncementPartially announcement)
+        {
+            try
+            {
+                if (announcement == null)
+                {
+                    return StatusCode((int)HttpStatusCode.BadRequest, ErrorMessagesEnum.InvalidData);
+                }
+                Announcement updateannouncement = await _announcementService.UpdateAnnouncementPartiallyAsync(id, announcement);
+                if (updateannouncement != null)
+                {
+                    return StatusCode((int)HttpStatusCode.OK, SuccessMessagesEnum.AnnouncementAdded);
+                }
+                return StatusCode((int)HttpStatusCode.NotFound, ErrorMessagesEnum.AnnouncementNotFound);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            try
+            {
+                var result = await _announcementService.DeleteAnnouncementAsync(id);
+                return StatusCode((int)HttpStatusCode.OK, SuccessMessagesEnum.AnnouncementRemoved);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+
     }
 }
