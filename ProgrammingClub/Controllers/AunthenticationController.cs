@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ProgrammingClub.Models.AuthenticationDTOs;
 using ProgrammingClub.Services;
@@ -7,6 +8,7 @@ namespace ProgrammingClub.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [ApiVersion("3.0")]
     public class AunthenticationController : ControllerBase
     {
         private readonly iTokenService _tokenService;
@@ -19,7 +21,8 @@ namespace ProgrammingClub.Controllers
         }
 
         [HttpPost]
-        [Route("register")] 
+        [Route("register")]
+        [MapToApiVersion("3.0")]
         public async Task<IActionResult> Register([FromBody] RegisterRequestDTO user)
         {
             var identityUser = new IdentityUser
@@ -30,14 +33,15 @@ namespace ProgrammingClub.Controllers
 
             var result = await _userManager.CreateAsync(identityUser, user.Password);
 
-            if(result.Succeeded) {
-                if(user.Roles != null && user.Roles.Length > 0)
+            if (result.Succeeded)
+            {
+                if (user.Roles != null && user.Roles.Length > 0)
                 {
                     foreach (var role in user.Roles)
                     {
                         await _userManager.AddToRoleAsync(identityUser, role);
                     }
-                    }
+                }
                 return Ok(new { message = "User registered" });
             }
             return BadRequest(result.Errors);
@@ -46,19 +50,21 @@ namespace ProgrammingClub.Controllers
 
         [HttpPost]
         [Route("login")]
-        public async Task<IActionResult> Login([FromBody] RegisterRequestDTO loginRequest)
+        [MapToApiVersion("3.0")]
+        public async Task<IActionResult> Login([FromBody] LoginRequestDTO loginRequest)
         {
             var identityUser = await _userManager.FindByNameAsync(loginRequest.Username);
-            if(identityUser != null)
+            if (identityUser != null)
             {
                 var checkPassword = await _userManager.CheckPasswordAsync(identityUser, loginRequest.Password);
-                if(checkPassword)
+                if (checkPassword)
                 {
                     var roles = await _userManager.GetRolesAsync(identityUser);
+
                     var token = _tokenService.CreateToken(identityUser, roles.ToList());
                     var response = new LoginRequestDTO
                     {
-                       // Token = token
+                        Token = token
                     };
                     return Ok(response);
                 }

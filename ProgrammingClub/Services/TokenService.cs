@@ -8,7 +8,6 @@ namespace ProgrammingClub.Services
     public class TokenService: iTokenService
     {
         public readonly IConfiguration _configuration;
-
         public TokenService(IConfiguration configuration)
         {
             _configuration = configuration;
@@ -30,7 +29,7 @@ namespace ProgrammingClub.Services
                 issuer: _configuration["JWT:Issuer"],
                 audience: _configuration["JWT:Audience"],
                 claims: claims,
-                expires: DateTime.Now.AddMinutes(30),
+                expires: DateTime.Now.AddMinutes(15),
                 signingCredentials: creds
             );
             return new JwtSecurityTokenHandler().WriteToken(token);

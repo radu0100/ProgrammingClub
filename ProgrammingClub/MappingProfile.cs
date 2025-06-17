@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using ProgrammingClub.Models;
 using ProgrammingClub.Models.CreateOrUpdateModels;
-using System.Runtime;
 
 namespace ProgrammingClub
 {
@@ -11,6 +10,5 @@ namespace ProgrammingClub
         {
             CreateMap<Member, UpdateMemberPartially>().ReverseMap();
         }
-
     }
 }

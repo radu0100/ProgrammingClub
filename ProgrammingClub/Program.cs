@@ -1,7 +1,9 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.EntityFrameworkCore;
 using ProgrammingClub.DataContext;
+using ProgrammingClub.Helpers;
 using ProgrammingClub.Repositories;
 using ProgrammingClub.Services;
 
@@ -14,12 +16,6 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
 {
-    options.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
-    {
-        Title = "Programming Club API",
-        Version = "v1",
-        Description = "First API - with authentication from scratch"
-    });
     options.AddSecurityDefinition("Bearer", new Microsoft.OpenApi.Models.OpenApiSecurityScheme
     {
         In = Microsoft.OpenApi.Models.ParameterLocation.Header,
@@ -27,6 +23,7 @@ builder.Services.AddSwaggerGen(options =>
         Name = "Authorization",
         Type = Microsoft.OpenApi.Models.SecuritySchemeType.ApiKey
     });
+
     options.AddSecurityRequirement(new Microsoft.OpenApi.Models.OpenApiSecurityRequirement
     {
         {
@@ -51,6 +48,7 @@ builder.Services.AddDbContext<ProgrammingClubAuthDataContext>(options =>
 
 builder.Services.AddTransient<iMembersRepository, MembersRepository>();
 builder.Services.AddTransient<iMembersService, MembersService>();
+builder.Services.AddTransient<iTokenService, TokenService>();
 
 builder.Services.AddTransient<iAnnouncementRepository, AnnouncementRepository>();
 builder.Services.AddTransient<iAnnouncementService, AnnouncementService>();
@@ -62,7 +60,7 @@ builder.Logging.AddLog4Net("log4net.config");
 //config gestionare useri
 builder.Services.AddIdentityCore<IdentityUser>()
     .AddRoles<IdentityRole>()
-    .AddTokenProvider<DataProtectorTokenProvider<IdentityUser>>("ProgrammingCLubAuthentication")
+    .AddTokenProvider<DataProtectorTokenProvider<IdentityUser>>("ProgrammingClubAuthentication")
     .AddEntityFrameworkStores<ProgrammingClubAuthDataContext>()
     .AddDefaultTokenProviders();
 
@@ -70,10 +68,9 @@ builder.Services.AddIdentityCore<IdentityUser>()
 builder.Services.Configure<IdentityOptions>(options =>
 {
     options.Password.RequireDigit = false;
-    options.Password.RequiredLength = 8;
+    options.Password.RequiredLength = 6;
     options.Password.RequireLowercase = false;
     options.Password.RequireUppercase = false;
-    options.Password.RequiredUniqueChars = 1;
 });
 
 //config autentificare JWT
@@ -92,17 +89,42 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 
+builder.Services.AddApiVersioning(options =>
+{
+    options.ReportApiVersions = true;
+    options.AssumeDefaultVersionWhenUnspecified = true;
+    options.DefaultApiVersion = new Microsoft.AspNetCore.Mvc.ApiVersion(1, 0);
+});
+
+builder.Services.AddVersionedApiExplorer(options =>
+{
+    options.GroupNameFormat = "'v'VVV";
+    options.SubstituteApiVersionInUrl = true;
+});
+
+builder.Services.ConfigureOptions<ConfigureSwagger>();
+
 var app = builder.Build();
+
+var versionDescriptionsProvider = app.Services.GetRequiredService<IApiVersionDescriptionProvider>();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(options =>
+    {
+        foreach (var item in versionDescriptionsProvider.ApiVersionDescriptions)
+
+        {
+            options.SwaggerEndpoint($"/swagger/{item.GroupName}/swagger.json", item.GroupName.ToUpperInvariant());
+        }
+    });
 }
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

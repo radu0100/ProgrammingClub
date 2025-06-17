@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using System.Net;
 using ProgrammingClub.Helpers;
 using ProgrammingClub.Models;
@@ -6,12 +7,13 @@ using ProgrammingClub.Models.CreateOrUpdateModels;
 using ProgrammingClub.Services;
 
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace ProgrammingClub.Controllers
 {
     [Route("api/[controller]")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
+    [ApiVersion("1.0")]
+    [ApiVersion("2.0")]
     public class MembersController : ControllerBase
     {
         private readonly iMembersService _membersService;
@@ -20,8 +22,9 @@ namespace ProgrammingClub.Controllers
             _membersService = membersService;
         }
 
-        // GET api/<MembersController>/1
+        // GET: api/<MembersController>
         [HttpGet]
+        [MapToApiVersion("1.0")]
         public async Task<IActionResult> Get()
         {
             try
@@ -39,8 +42,28 @@ namespace ProgrammingClub.Controllers
             }
         }
 
+        [HttpGet]
+        [MapToApiVersion("2.0")]
+        public async Task<IActionResult> GetV2()
+        {
+            try
+            {
+                var members = await _membersService.GetAllMembersAsync();
+                if (members.Count() <= 0)
+                {
+                    return StatusCode((int)HttpStatusCode.OK, ErrorMessagesEnum.NoMembersFound);
+                }
+                return Ok("Return V2");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+
         // GET api by ID/<MembersController>/2
         [HttpGet("{id}")]
+        [Authorize(Roles = "Admin,Member")]
         public async Task<IActionResult> Get(Guid id)
         {
             try
@@ -59,6 +82,7 @@ namespace ProgrammingClub.Controllers
 
         // POST api/<MembersController>/3
         [HttpPost]
+        [Authorize(Roles = "Admin,Member")]
         public async Task<IActionResult> Post([FromBody] Member member)
         {
             try
@@ -79,6 +103,7 @@ namespace ProgrammingClub.Controllers
 
         // PUT api/<MembersController>/4
         [HttpPut("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Put(Guid id, [FromBody] Member member)
         {
             try
@@ -104,6 +129,7 @@ namespace ProgrammingClub.Controllers
 
         // PATCH api/<MembersController>/5
         [HttpPatch("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> PatchMember(Guid id, [FromBody] UpdateMemberPartially member)
         {
             try
@@ -127,6 +153,7 @@ namespace ProgrammingClub.Controllers
 
         // DELETE api/<MembersController>/6
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(Guid id)
         {
             try

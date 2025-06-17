@@ -12,6 +12,6 @@ namespace ProgrammingClub.Models.AuthenticationDTOs
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
-        public string[] Token { get; set; }
+        public string Token { get; set; }
     }
 }
