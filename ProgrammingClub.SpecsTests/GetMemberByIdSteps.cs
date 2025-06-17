@@ -1,14 +1,16 @@
-﻿using ProgrammingClub.DataContext;
-using ProgrammingClub.Models;
-using TechTalk.SpecFlow;
-using Microsoft.EntityFrameworkCore;
-using ProgrammingClub.Services;
+﻿using Microsoft.EntityFrameworkCore;
+using ProgrammingClub.DataContext;
 using ProgrammingClub.Repositories;
+using ProgrammingClub.Services;
+using ProgrammingClub.DataContext;
+using ProgrammingClub.Models;
+using ProgrammingClub.Repositories;
+using ProgrammingClub.Services;
+using TechTalk.SpecFlow;
 
-
-namespace ProgrammingClub.SpecsTests
+namespace ProgrammingClubAPI.SpecsTests
 {
-
+    [Binding]
     public class GetMemberByIdSteps
     {
         private MembersService _membersService;
@@ -19,9 +21,9 @@ namespace ProgrammingClub.SpecsTests
 
 
         [Given(@"a member exists with IDMember ""(.*)""")]
-        public void GivenAMemberExistWithIdMember(string idMember)
+        public void GivenAMemberExistWithIdMember(string IDMember)
         {
-            var id = Guid.Parse(idMember);
+            var id = Guid.Parse(IDMember);
 
             _testMember = new Member()
             {
@@ -70,4 +72,3 @@ namespace ProgrammingClub.SpecsTests
         }
     }
 }
-

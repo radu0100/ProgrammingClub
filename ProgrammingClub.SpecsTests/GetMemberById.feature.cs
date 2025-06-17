@@ -99,7 +99,7 @@ this.ScenarioInitialize(scenarioInfo);
             {
                 this.ScenarioStart();
 #line 4
- testRunner.Given("a member exists with IDMember \"5270dda8-5041-4002-af0f-e1c3488e868e\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given("a member exists with IDMember \"6A6969B6-C665-452E-AE7B-8E33FFA0B651\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 5
  testRunner.When("the member is requested by IDMember", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
