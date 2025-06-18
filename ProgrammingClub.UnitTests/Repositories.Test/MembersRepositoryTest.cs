@@ -91,9 +91,9 @@ namespace ProgrammingClubAPI.UnitTests.Repositories.Test
             // Act
             await _membersRepository.AddMemberAsync(newMember);
             var addedMember = await _membersRepository.GetMemberByIdAsync(newMember.IDMember);
+
             // Assert
             Assert.Null(addedMember);
-            // Assert.Equal(newMember.IDMember, addedMember.IDMember);
         }
 
         [Fact]
@@ -105,6 +105,7 @@ namespace ProgrammingClubAPI.UnitTests.Repositories.Test
             // Act
             await _membersRepository.AddMemberAsync(newMember);
             var addedMember = await _membersRepository.GetMemberByIdAsync(newMember.IDMember);
+
             // Assert
             Assert.NotNull(addedMember);
             Assert.Equal(newMember.IDMember, addedMember.IDMember);
@@ -117,8 +118,10 @@ namespace ProgrammingClubAPI.UnitTests.Repositories.Test
         {
             // Arrange
             var testMember = await DBContextHelper.AddTestMember(_contextInMemory);
+
             // Act
             var exists = await _membersRepository.UsernameExistsAsync(testMember.Username);
+
             // Assert
             Assert.True(exists);
         }
@@ -128,8 +131,10 @@ namespace ProgrammingClubAPI.UnitTests.Repositories.Test
         {
             // Arrange
             var nonExistentUsername = "nonExistentUsername";
+
             // Act
             var exists = await _membersRepository.UsernameExistsAsync(nonExistentUsername);
+
             // Assert
             Assert.False(exists);
         }
@@ -141,9 +146,11 @@ namespace ProgrammingClubAPI.UnitTests.Repositories.Test
         {
             // Arrange
             var testMember = await DBContextHelper.AddTestMember(_contextInMemory);
+
             testMember.Name = "UpdatedName";
             // Act
             var updatedMember = await _membersRepository.UpdateMemberAsync(testMember);
+
             // Assert
             Assert.NotNull(updatedMember);
             Assert.Equal(testMember.IDMember, updatedMember.IDMember);
@@ -155,8 +162,10 @@ namespace ProgrammingClubAPI.UnitTests.Repositories.Test
         {
             // Arrange
             var nonExistentMember = new MemberBuilder().With(x => x.IDMember = Guid.NewGuid()).Build();
+
             // Act
             var updatedMember = await _membersRepository.UpdateMemberAsync(nonExistentMember);
+
             // Assert
             Assert.Null(updatedMember);
         }
@@ -165,9 +174,11 @@ namespace ProgrammingClubAPI.UnitTests.Repositories.Test
         public async Task UpdateMemberAsync_ShouldReturnNull_WhenInvalIDMemberProvided()
         {
             // Arrange
-            var invalIDMember = new Member(); // Invalid member with no IDMember set
+            var invalIDMember = new Member();
+
             // Act
             var updatedMember = await _membersRepository.UpdateMemberAsync(invalIDMember);
+
             // Assert
             Assert.Null(updatedMember);
         }
@@ -179,8 +190,10 @@ namespace ProgrammingClubAPI.UnitTests.Repositories.Test
         {
             // Arrange
             var testMember = await DBContextHelper.AddTestMember(_contextInMemory);
+
             // Act
             var exists = await _membersRepository.MemberExistAsync(testMember.IDMember);
+
             // Assert
             Assert.True(exists);
         }
@@ -190,8 +203,10 @@ namespace ProgrammingClubAPI.UnitTests.Repositories.Test
         {
             // Arrange
             var nonExistentUsername = Guid.NewGuid();
+
             // Act
             var exists = await _membersRepository.MemberExistAsync(nonExistentUsername);
+
             // Assert
             Assert.False(exists);
         }
@@ -204,8 +219,10 @@ namespace ProgrammingClubAPI.UnitTests.Repositories.Test
             // Arrange
             var testMember = await DBContextHelper.AddTestMember(_contextInMemory);
             testMember.Name = "UpdatedName";
+
             // Act
             var updatedMember = await _membersRepository.UpdateMemberAsync(testMember);
+
             // Assert
             Assert.NotNull(updatedMember);
             Assert.Equal(testMember.IDMember, updatedMember.IDMember);
@@ -219,8 +236,10 @@ namespace ProgrammingClubAPI.UnitTests.Repositories.Test
         {
             // Arrange
             var testMember = await DBContextHelper.AddTestMember(_contextInMemory);
+
             // Act
             var deleted = await _membersRepository.DeleteMemberAsync(testMember.IDMember);
+
             // Assert
             Assert.True(deleted);
             var memberAfterDeletion = await _membersRepository.GetMemberByIdAsync(testMember.IDMember);
@@ -231,8 +250,10 @@ namespace ProgrammingClubAPI.UnitTests.Repositories.Test
         {
             // Arrange
             var nonExistentId = Guid.NewGuid();
+
             // Act
             var deleted = await _membersRepository.DeleteMemberAsync(nonExistentId);
+
             // Assert
             Assert.False(deleted);
         }
@@ -241,9 +262,11 @@ namespace ProgrammingClubAPI.UnitTests.Repositories.Test
         public async Task DeleteMemberAsync_ShouldReturnFalse_WhenInvalIDMemberProvided()
         {
             // Arrange
-            var invalIDMember = new Member(); // Invalid member with no IDMember set
+            var invalIDMember = new Member();
+
             // Act
             var deleted = await _membersRepository.DeleteMemberAsync(invalIDMember.IDMember);
+
             // Assert
             Assert.False(deleted);
         }
