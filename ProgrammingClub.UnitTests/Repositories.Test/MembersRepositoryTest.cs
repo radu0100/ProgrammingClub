@@ -1,11 +1,12 @@
-﻿using ProgrammingClub.Models;
-using ProgrammingClub.DataContext;
+﻿using ProgrammingClub.DataContext;
+using ProgrammingClub.Repositories;
 using ProgrammingClub.UnitTests.Helpers;
 using ProgrammingClub.UnitTests.Models.Builders;
-using ProgrammingClub.Repositories;
+using ProgrammingClub.Models;
 
-namespace ProgrammingClub.UnitTests.Repositories.Test
-{ 
+
+namespace ProgrammingClubAPI.UnitTests.Repositories.Test
+{
     public class MembersRepositoryTest
     {
         private readonly MembersRepository _membersRepository;

@@ -23,11 +23,11 @@ namespace ProgrammingClub.Repositories
 
         public async Task AddMemberAsync(Member member)
         {
-            if (member.IDMember == Guid.Empty)
-            {
-                _context.Entry(member).State = EntityState.Added;
-                await _context.SaveChangesAsync();
-            }
+            if (member == null || member.IDMember == Guid.Empty)
+                return;
+
+            await _context.Members.AddAsync(member);
+            await _context.SaveChangesAsync();
         }
 
         public async Task<bool> UsernameExistsAsync(string username)
@@ -35,15 +35,24 @@ namespace ProgrammingClub.Repositories
             return await _context.Members.AnyAsync(m => m.Username == username);
         }
 
-        public async Task<Member> UpdateMemberAsync(Member member)
+        public async Task<Member?> UpdateMemberAsync(Member member)
         {
-            if (member.IDMember != Guid.Empty && !await MemberExistAsync(member.IDMember))
-            {
-                _context.Update(member);
-                await _context.SaveChangesAsync();
-                return member;
-            }
-            return null;
+            if (member.IDMember == Guid.Empty)
+                return null;
+
+            var existingMember = await _context.Members.FindAsync(member.IDMember);
+            if (existingMember == null)
+                return null;
+
+            existingMember.Username = member.Username;
+            existingMember.Password = member.Password;
+            existingMember.Name = member.Name;
+            existingMember.Title = member.Title;
+            existingMember.Resume = member.Resume;
+            existingMember.Description = member.Description;
+
+            await _context.SaveChangesAsync();
+            return existingMember;
         }
 
         public async Task<bool> MemberExistAsync(Guid id)
