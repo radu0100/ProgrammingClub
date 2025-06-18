@@ -53,13 +53,13 @@ namespace ProgrammingClubAPI.SpecsTests
             _membersService = new MembersService(_membersRepository, null);
         }
 
-        [When(@"the member is requested by IdMember")]
+        [When(@"the member is requested by IDMember")]
         public async Task WhenTheMemberIsRequestedByIdMember()
         {
             _resultMember = await _membersService.GetMemberByIdAsync(_testMember.IDMember);
         }
 
-        [Then(@"the member should be returned with IdMember")]
+        [Then(@"the response should contain the member with the same IDMember")]
         public void ThenTheMemberShouldBeReturnedWithIdMember()
         {
             Assert.NotNull(_resultMember);

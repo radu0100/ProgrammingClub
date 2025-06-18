@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using ProgrammingClub.Controllers;
 using ProgrammingClub.DataContext;
 using ProgrammingClub.Helpers;
-using ProgrammingClub.Models;
 using ProgrammingClub.Repositories;
 using ProgrammingClub.Services;
+using ProgrammingClub.Controllers;
+using ProgrammingClub.Models;
 using ProgrammingClub.UnitTests.Helpers;
 
 
@@ -13,32 +13,32 @@ namespace ProgrammingClub.UnitTests.Controllers.Integration
 {
     public class MembersControllerTests
     {
-        private readonly iMembersService _membersService;
-        private readonly MembersController _membersController;
+        private readonly MembersService _membersService;
         private readonly MembersRepository repository;
+        private readonly MembersController _membersController;
         private readonly ProgrammingClubDataContext _contextInMemory;
 
-        public MembersControllerTests(iMembersService membersService)
+        public MembersControllerTests()
         {
             _contextInMemory = DBContextHelper.GetDatabaseContext();
             repository = new MembersRepository(_contextInMemory);
-            _membersService = membersService;
+            _membersService = new MembersService(repository, null);
             _membersController = new MembersController(_membersService);
         }
 
         [Fact]
-        public async Task Get_ShouldReturnAllMembers()
+        public async Task Get_ShouldReturnAllMembers_WhenMembersExist()
         {
-            // Arrange
-            var member1 = await DBContextHelper.AddTestMember(_contextInMemory);
-            var member2 = await DBContextHelper.AddTestMember(_contextInMemory);
+            //Arrange
+            var testMember1 = await DBContextHelper.AddTestMember(_contextInMemory);
+            var testMember2 = await DBContextHelper.AddTestMember(_contextInMemory);
 
-            // Act
+            //Act
             var result = await _membersController.Get();
             var okResult = result as OkObjectResult;
-            var members = okResult?.Value as IEnumerable<Member>;
+            var members = okResult.Value as IEnumerable<Member>;
 
-            // Assert
+            //Assert
             Assert.NotNull(result);
             Assert.NotNull(okResult);
             Assert.Equal(200, okResult.StatusCode);
@@ -47,12 +47,14 @@ namespace ProgrammingClub.UnitTests.Controllers.Integration
         }
 
         [Fact]
-        public async Task Get_ShouldReturnNotFound_WhenNoMemberExist()
+        public async Task Get_ShouldReturnNotFound_WhenNoMembersExist()
         {
-            // Act
+            //Arrange
+
+            //Act
             var result = await _membersController.Get();
 
-            // Assert
+            //Assert
             Assert.NotNull(result);
             var notFoundResult = result as ObjectResult;
             Assert.NotNull(notFoundResult);
