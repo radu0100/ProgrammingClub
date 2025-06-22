@@ -1,0 +1,11 @@
+ADMIN ACCOUNT:
+
+	"username": "admin@gmail.com",
+	"password": "Password1*",
+	"roles": ["ADMIN"]
+
+MEMBER ACCOUNT:
+
+	"username": "member@gmail.com",
+	"password": "Password1*",
+	"roles": ["MEMBER"]

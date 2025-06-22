@@ -104,6 +104,9 @@ builder.Services.AddVersionedApiExplorer(options =>
 
 builder.Services.ConfigureOptions<ConfigureSwagger>();
 
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
+
+builder.Services.AddMemoryCache();
 var app = builder.Build();
 
 var versionDescriptionsProvider = app.Services.GetRequiredService<IApiVersionDescriptionProvider>();
