@@ -1,0 +1,13 @@
+﻿C:\Users\iradu\source\repos\ProgrammingClubSolution\ProgrammingClub.UnitTests\Controllers.Integration\MembersControllerTests.cs
+C:\Users\iradu\source\repos\ProgrammingClubSolution\ProgrammingClub.UnitTests\Helpers\DBContextHelper.cs
+C:\Users\iradu\source\repos\ProgrammingClubSolution\ProgrammingClub.UnitTests\Models\BuilderBase.cs
+C:\Users\iradu\source\repos\ProgrammingClubSolution\ProgrammingClub.UnitTests\Models\Builders\AnnouncementBuilder.cs
+C:\Users\iradu\source\repos\ProgrammingClubSolution\ProgrammingClub.UnitTests\Models\Builders\MemberBuilder.cs
+C:\Users\iradu\source\repos\ProgrammingClubSolution\ProgrammingClub.UnitTests\Repositories.Test\AnnouncementRepositoryTest.cs
+C:\Users\iradu\source\repos\ProgrammingClubSolution\ProgrammingClub.UnitTests\Repositories.Test\MembersRepositoryTest.cs
+C:\Users\iradu\.nuget\packages\microsoft.net.test.sdk\17.8.0\build\netcoreapp3.1\Microsoft.NET.Test.Sdk.Program.cs
+C:\Users\iradu\.nuget\packages\microsoft.testplatform.testhost\17.8.0\build\netcoreapp3.1\x64\testhost.exe
+C:\Users\iradu\.nuget\packages\microsoft.testplatform.testhost\17.8.0\build\netcoreapp3.1\x64\testhost.dll
+C:\Users\iradu\.nuget\packages\xunit.runner.visualstudio\2.5.3\build\net6.0\xunit.runner.visualstudio.dotnetcore.testadapter.dll
+C:\Users\iradu\.nuget\packages\xunit.runner.visualstudio\2.5.3\build\net6.0\xunit.runner.reporters.netcoreapp10.dll
+C:\Users\iradu\.nuget\packages\xunit.runner.visualstudio\2.5.3\build\net6.0\xunit.runner.utility.netcoreapp10.dll

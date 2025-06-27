@@ -1,0 +1,17 @@
+﻿C:\Users\iradu\source\repos\ProgrammingClubSolution\Authentication\Controllers\AunthenticationController.cs
+C:\Users\iradu\source\repos\ProgrammingClubSolution\Authentication\DataContext\ProgrammingClubAuthDataContext.cs
+C:\Users\iradu\source\repos\ProgrammingClubSolution\Authentication\Models\AuthenticationDTOs\LoginRequestDTO.cs
+C:\Users\iradu\source\repos\ProgrammingClubSolution\Authentication\Models\AuthenticationDTOs\RegisterRequestDTO.cs
+C:\Users\iradu\source\repos\ProgrammingClubSolution\Authentication\Program.cs
+C:\Users\iradu\source\repos\ProgrammingClubSolution\Authentication\Services\iTokenService.cs
+C:\Users\iradu\source\repos\ProgrammingClubSolution\Authentication\Services\TokenService.cs
+C:\Users\iradu\source\repos\ProgrammingClubSolution\Authentication\obj\Debug\net8.0\Authentication.GlobalUsings.g.cs
+C:\Users\iradu\source\repos\ProgrammingClubSolution\Authentication\obj\Debug\net8.0\.NETCoreApp,Version=v8.0.AssemblyAttributes.cs
+C:\Users\iradu\source\repos\ProgrammingClubSolution\Authentication\obj\Debug\net8.0\Authentication.AssemblyInfo.cs
+C:\Users\iradu\source\repos\ProgrammingClubSolution\Authentication\obj\Debug\net8.0\Authentication.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\iradu\source\repos\ProgrammingClubSolution\Authentication\appsettings.Development.json
+C:\Users\iradu\source\repos\ProgrammingClubSolution\Authentication\appsettings.json
+C:\Users\iradu\source\repos\ProgrammingClubSolution\Authentication\Authentication.http
+C:\Users\iradu\source\repos\ProgrammingClubSolution\Authentication\Dockerfile
+C:\Users\iradu\source\repos\ProgrammingClubSolution\Authentication\Properties\launchSettings.json
+C:\Users\iradu\source\repos\ProgrammingClubSolution\.dockerignore
