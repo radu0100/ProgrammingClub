@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProgrammingClub.SpecsTests"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProgrammingClub.UnitTests", "ProgrammingClub.UnitTests\ProgrammingClub.UnitTests.csproj", "{7712568D-EA6A-97F2-8C01-8001F471DC45}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Authentication", "Authentication\Authentication.csproj", "{C8BD4989-BB65-4B2C-98B3-E26579C70597}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{7712568D-EA6A-97F2-8C01-8001F471DC45}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7712568D-EA6A-97F2-8C01-8001F471DC45}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7712568D-EA6A-97F2-8C01-8001F471DC45}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C8BD4989-BB65-4B2C-98B3-E26579C70597}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C8BD4989-BB65-4B2C-98B3-E26579C70597}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C8BD4989-BB65-4B2C-98B3-E26579C70597}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C8BD4989-BB65-4B2C-98B3-E26579C70597}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

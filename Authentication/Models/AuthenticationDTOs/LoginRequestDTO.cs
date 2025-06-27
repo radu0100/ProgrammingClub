@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace ProgrammingClub.Models.AuthenticationDTOs
+namespace Authentication.Models.AuthenticationDTOs
 {
     public class LoginRequestDTO
     {

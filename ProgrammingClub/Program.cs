@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.EntityFrameworkCore;
 using ProgrammingClub.DataContext;
@@ -43,12 +42,8 @@ builder.Services.AddSwaggerGen(options =>
 builder.Services.AddDbContext<ProgrammingClubDataContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-builder.Services.AddDbContext<ProgrammingClubAuthDataContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectionAuth")));
-
 builder.Services.AddTransient<iMembersRepository, MembersRepository>();
 builder.Services.AddTransient<iMembersService, MembersService>();
-builder.Services.AddTransient<iTokenService, TokenService>();
 
 builder.Services.AddTransient<iAnnouncementRepository, AnnouncementRepository>();
 builder.Services.AddTransient<iAnnouncementService, AnnouncementService>();
@@ -56,38 +51,6 @@ builder.Services.AddTransient<iAnnouncementService, AnnouncementService>();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Logging.AddLog4Net("log4net.config");
-
-//config gestionare useri
-builder.Services.AddIdentityCore<IdentityUser>()
-    .AddRoles<IdentityRole>()
-    .AddTokenProvider<DataProtectorTokenProvider<IdentityUser>>("ProgrammingClubAuthentication")
-    .AddEntityFrameworkStores<ProgrammingClubAuthDataContext>()
-    .AddDefaultTokenProviders();
-
-//reguli validare pass
-builder.Services.Configure<IdentityOptions>(options =>
-{
-    options.Password.RequireDigit = false;
-    options.Password.RequiredLength = 6;
-    options.Password.RequireLowercase = false;
-    options.Password.RequireUppercase = false;
-});
-
-//config autentificare JWT
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddJwtBearer(options =>
-    {
-        options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
-        {
-            ValidateIssuer = true,
-            ValidateAudience = true,
-            ValidateLifetime = true,
-            ValidateIssuerSigningKey = true,
-            ValidIssuer = builder.Configuration["JWT:Issuer"],
-            ValidAudience = builder.Configuration["JWT:Audience"],
-            IssuerSigningKey = new Microsoft.IdentityModel.Tokens.SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(builder.Configuration["JWT:Key"]))
-        };
-    });
 
 builder.Services.AddApiVersioning(options =>
 {
@@ -107,6 +70,22 @@ builder.Services.ConfigureOptions<ConfigureSwagger>();
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
 
 builder.Services.AddMemoryCache();
+
+//config autentificare JWT
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            ValidIssuer = builder.Configuration["JWT:Issuer"],
+            ValidAudience = builder.Configuration["JWT:Audience"],
+            IssuerSigningKey = new Microsoft.IdentityModel.Tokens.SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(builder.Configuration["JWT:Key"]))
+        };
+    });
 var app = builder.Build();
 
 var versionDescriptionsProvider = app.Services.GetRequiredService<IApiVersionDescriptionProvider>();
