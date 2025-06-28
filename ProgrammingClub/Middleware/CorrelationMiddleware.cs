@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore.SqlServer.Query.Internal;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 
 namespace ProgrammingClub.Middleware
 {

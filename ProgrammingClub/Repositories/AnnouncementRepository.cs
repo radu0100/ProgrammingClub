@@ -34,9 +34,15 @@ namespace ProgrammingClub.Repositories
 
         public async Task<Announcement> UpdateAnnouncementAsync(Announcement announcement)
         {
-            _context.Update(announcement);
+            var existing = await _context.Announcement.FindAsync(announcement.IdAnnouncement);
+            if (existing == null)
+            {
+                return null;
+            }
+
+            _context.Entry(existing).CurrentValues.SetValues(announcement);
             await _context.SaveChangesAsync();
-            return announcement;
+            return existing;
         }
 
         public async Task<bool> AnnouncementExistAsync(Guid id)

@@ -1,9 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ProgrammingClub.DataContext;
 using ProgrammingClub.UnitTests.Models.Builders;
-using ProgrammingClub.DataContext;
 using ProgrammingClub.Models;
-using ProgrammingClub.UnitTests.Models.Builders;
 
 namespace ProgrammingClub.UnitTests.Helpers
 {
@@ -35,6 +33,19 @@ namespace ProgrammingClub.UnitTests.Helpers
             context.Entry(testMember).State = EntityState.Detached;
 
             return testMember;
+        }
+
+        public static async Task<Announcement> AddTestAnnouncement(ProgrammingClubDataContext context, Announcement? testAnnouncement = null)
+        {
+            testAnnouncement ??= new AnnouncementBuilder().Build();
+
+            context.Announcement.Add(testAnnouncement);
+
+            await context.SaveChangesAsync();
+
+            context.Entry(testAnnouncement).State = EntityState.Detached;
+
+            return testAnnouncement;
         }
     }
 }
