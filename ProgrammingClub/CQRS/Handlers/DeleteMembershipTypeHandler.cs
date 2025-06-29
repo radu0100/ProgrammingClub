@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using ProgrammingClub.CQRS.Commands;
 using ProgrammingClub.DataContext;
 
 namespace ProgrammingClub.CQRS.Handlers

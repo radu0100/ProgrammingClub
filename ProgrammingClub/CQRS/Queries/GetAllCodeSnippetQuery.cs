@@ -3,7 +3,7 @@ using ProgrammingClub.Models;
 
 namespace ProgrammingClub.CQRS.Queries
 {
-    public class GetAllMembershipTypesQuery : IRequest<IEnumerable<MembershipType>>
+    public class GetAllCodeSnippetQuery : IRequest<IEnumerable<CodeSnippet>>
     {
     }
 }

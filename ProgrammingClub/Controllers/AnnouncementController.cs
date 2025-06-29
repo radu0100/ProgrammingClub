@@ -1,16 +1,17 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Net;
+using Microsoft.AspNetCore.Mvc;
 using ProgrammingClub.Helpers;
 using ProgrammingClub.Models;
-using ProgrammingClub.Models.CreateOrUpdateModels;
 using ProgrammingClub.Services;
-using System.Net;
+using ProgrammingClub.Models.CreateOrUpdateModels;
 
 
 namespace ProgrammingClub.Controllers
 {
+    [ApiVersion("3.0")]
     [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
-    [ApiVersion("3.0")]
+
     public class AnnouncementController : ControllerBase
     {
         private readonly iAnnouncementService _announcementService;
@@ -19,9 +20,8 @@ namespace ProgrammingClub.Controllers
             _announcementService = announcementService;
         }
 
-        // GET: api/<AnnouncementsController>
+        // GET: api/<AnnouncementsController>/1
         [HttpGet]
-        [MapToApiVersion("3.0")]
         public async Task<IActionResult> Get()
         {
             try
@@ -39,9 +39,8 @@ namespace ProgrammingClub.Controllers
             }
         }
 
-        // GET api by ID/<AnnouncementsController>/5
+        // GET api by ID/<AnnouncementsController>/2
         [HttpGet("{id:guid}")]
-        [MapToApiVersion("3.0")]
         public async Task<IActionResult> GetAnnouncementById(Guid id)
         {
             try
@@ -59,9 +58,8 @@ namespace ProgrammingClub.Controllers
             }
         }
 
-        // POST api/<AnnouncementController>
+        // POST api/<AnnouncementController>/3
         [HttpPost]
-        [MapToApiVersion("3.0")]
         public async Task<IActionResult> AddAnnouncement([FromBody] Announcement announcement)
         {
             try
@@ -80,9 +78,8 @@ namespace ProgrammingClub.Controllers
             }
         }
 
-        // PUT api/<announcementsController>/5
+        // PUT api/<AnnouncementController>/4
         [HttpPut("{id}")]
-        [MapToApiVersion("3.0")]
         public async Task<IActionResult> Put(Guid id, [FromBody] Announcement announcement)
         {
             try
@@ -106,8 +103,8 @@ namespace ProgrammingClub.Controllers
             }
         }
 
+        // PATCH api/<AnnouncementController>/5
         [HttpPatch("{id}")]
-        [MapToApiVersion("3.0")]
         public async Task<IActionResult> PatchAnnouncement(Guid id, [FromBody] UpdateAnnouncementPartially announcement)
         {
             try
@@ -129,8 +126,8 @@ namespace ProgrammingClub.Controllers
             }
         }
 
+        // DELETE api/<AnnouncementController>/6
         [HttpDelete("{id}")]
-        [MapToApiVersion("3.0")]
         public async Task<IActionResult> Delete(Guid id)
         {
             try

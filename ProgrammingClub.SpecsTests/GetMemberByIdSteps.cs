@@ -2,10 +2,7 @@
 using ProgrammingClub.DataContext;
 using ProgrammingClub.Repositories;
 using ProgrammingClub.Services;
-using ProgrammingClub.DataContext;
 using ProgrammingClub.Models;
-using ProgrammingClub.Repositories;
-using ProgrammingClub.Services;
 using TechTalk.SpecFlow;
 
 namespace ProgrammingClubAPI.SpecsTests

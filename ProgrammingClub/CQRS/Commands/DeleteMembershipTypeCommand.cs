@@ -1,10 +1,13 @@
 ﻿using MediatR;
 
-public class DeleteMembershipTypeCommand : IRequest<bool>
+namespace ProgrammingClub.CQRS.Commands
 {
-    public Guid IdMembershipType { get; set; }
-    public DeleteMembershipTypeCommand(Guid idMembershipType)
+    public class DeleteMembershipTypeCommand : IRequest<bool>
     {
-        IdMembershipType = idMembershipType;
+        public Guid IdMembershipType { get; set; }
+        public DeleteMembershipTypeCommand(Guid idMembershipType)
+        {
+            IdMembershipType = idMembershipType;
+        }
     }
 }

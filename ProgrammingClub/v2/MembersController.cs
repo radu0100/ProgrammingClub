@@ -7,9 +7,10 @@ using System.Net;
 
 namespace ProgrammingClub.v2
 {
-    [Route("api/v2/[controller]")]
-    [ApiController]
     [ApiVersion("2.0")]
+    [Route("api/v{version:apiVersion}/[controller]")]
+    [ApiController]
+
     public class MembersController : ControllerBase
     {
         private readonly iMembersService _membersService;

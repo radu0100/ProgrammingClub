@@ -59,19 +59,6 @@ namespace ProgrammingClub.UnitTests.Repositories.Test
         }
 
         [Fact]
-        public async Task UpdateAnnouncementAsync_ShouldReturnNull_WhenNotExists()
-        {
-            // Arrange
-            var announcement = new Announcement { IdAnnouncement = Guid.NewGuid(), Title = "DoesNotExist" };
-
-            // Act
-            var updated = await _announcementRepository.UpdateAnnouncementAsync(announcement);
-
-            // Assert
-            Assert.Null(updated); // Now expects null when not found
-        }
-
-        [Fact]
         public async Task AddAnnouncementAsync_ShouldAddAnnouncement()
         {
             // Arrange
@@ -98,7 +85,7 @@ namespace ProgrammingClub.UnitTests.Repositories.Test
             var announcement = await DBContextHelper.AddTestAnnouncement(_contextInMemory);
 
             // Act
-            var exists = await _announcementRepository.TitleExistsAsync(announcement.Title);
+            var exists = await _announcementRepository.TitleExistsAsync(announcement.Title ?? string.Empty);
 
             // Assert
             Assert.True(exists);
@@ -139,7 +126,7 @@ namespace ProgrammingClub.UnitTests.Repositories.Test
             var updated = await _announcementRepository.UpdateAnnouncementAsync(announcement);
 
             // Assert
-            Assert.NotNull(updated); // The repository always returns the input, but you may want to check existence before updating in your service layer.
+            Assert.Null(updated);
         }
 
         [Fact]

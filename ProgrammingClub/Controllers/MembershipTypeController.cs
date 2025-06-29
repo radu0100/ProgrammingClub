@@ -7,8 +7,10 @@ using ProgrammingClub.Models;
 
 namespace ProgrammingClub.Controllers
 {
-    [Route("api/[controller]")]
+    [ApiVersion("3.0")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
+
     public class MembershipTypesController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -17,7 +19,7 @@ namespace ProgrammingClub.Controllers
             _mediator = mediator;
         }
 
-        // GET: api/MembershipTypes
+        // GET: api/MembershipTypesController>/1
         [HttpGet]
         public async Task<ActionResult<IEnumerable<MembershipType>>> GetAllMembershipTypes()
         {
@@ -26,6 +28,7 @@ namespace ProgrammingClub.Controllers
             return Ok(membershipTypes);
         }
 
+        // GET api by ID/<MembershipTypeController>/2
         [HttpGet("{id}")]
         public async Task<ActionResult<MembershipType>> GetMembershipTypeById(Guid id)
         {
@@ -39,6 +42,7 @@ namespace ProgrammingClub.Controllers
             return Ok(membershipType);
         }
 
+        // POST api/<MembershipTypeController>/3
         [HttpPost]
         public async Task<IActionResult> CreateMembershipType(MembershipTypeDTO dto)
         {
@@ -47,6 +51,7 @@ namespace ProgrammingClub.Controllers
             return Ok(membershipTypeId);
         }
 
+        // DELETE api/<MembershipTypeController>/4
         [HttpDelete]
         public async Task<IActionResult> DeleteMembershipType(Guid id)
         {
@@ -59,6 +64,7 @@ namespace ProgrammingClub.Controllers
             return NotFound();
         }
 
+        // PUT api/<MembershipTypeController>/5
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateMembershipType(Guid id, MembershipType model)
         {

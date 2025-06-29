@@ -8,7 +8,6 @@ using ProgrammingClub.Models;
 using ProgrammingClub.UnitTests.Helpers;
 
 
-
 namespace ProgrammingClub.UnitTests.Controllers.Integration
 {
     public class MembersControllerTests

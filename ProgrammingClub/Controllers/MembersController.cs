@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Net;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
-using System.Net;
 using ProgrammingClub.Helpers;
 using ProgrammingClub.Models;
 using ProgrammingClub.Models.CreateOrUpdateModels;
@@ -9,11 +9,10 @@ using ProgrammingClub.Services;
 
 namespace ProgrammingClub.Controllers
 {
-    //[Route("api/[controller]")]
+    [ApiVersion("3.0")]
     [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
-    [ApiVersion("2.0")]
-    [ApiVersion("3.0")]
+
     public class MembersController : ControllerBase
     {
         private readonly iMembersService _membersService;
@@ -22,9 +21,8 @@ namespace ProgrammingClub.Controllers
             _membersService = membersService;
         }
 
-        // GET: api/<MembersController>
+        // GET: api/<MembersController>/1
         [HttpGet]
-        [HttpGet("{id}")]
         [Authorize(Roles = "Admin,Member")]
         public async Task<IActionResult> Get()
         {
@@ -42,27 +40,7 @@ namespace ProgrammingClub.Controllers
                 return StatusCode(500, $"Internal server error: {ex.Message}");
             }
         }
-
-        [HttpGet]
-        [HttpGet("{id}")]
-        [Authorize(Roles = "Admin,Member")]
-        [MapToApiVersion("2.0")]
-        public async Task<IActionResult> GetV2()
-        {
-            try
-            {
-                var members = await _membersService.GetAllMembersAsync();
-                if (members.Count() <= 0)
-                {
-                    return StatusCode((int)HttpStatusCode.OK, ErrorMessagesEnum.NoMembersFound);
-                }
-                return Ok("Return V2");
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, $"Internal server error: {ex.Message}");
-            }
-        }
+         
 
         // GET api by ID/<MembersController>/2
         [HttpGet("{id}")]
