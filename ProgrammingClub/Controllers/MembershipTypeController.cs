@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using ProgrammingClub.CQRS.Commands;
 using ProgrammingClub.CQRS.DTOs;
 using ProgrammingClub.CQRS.Queries;
+using ProgrammingClub.CustomException;
 using ProgrammingClub.Models;
 
 namespace ProgrammingClub.Controllers
@@ -46,9 +47,17 @@ namespace ProgrammingClub.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateMembershipType(MembershipTypeDto dto)
         {
-            var command = new CreateMembershipTypeCommand(dto);
-            var membershipTypeId = await _mediator.Send(command);
-            return Ok(membershipTypeId);
+            try
+            {
+                var command = new CreateMembershipTypeCommand(dto);
+                var membershipTypeId = await _mediator.Send(command);
+                return Ok(membershipTypeId);
+            }
+
+            catch (DuplicateMembershipTypeException ex)
+            {
+                return Conflict(new { message = ex.Message });
+            }
         }
 
         // DELETE api/<MembershipTypeController>/4

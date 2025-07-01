@@ -1,9 +1,12 @@
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.EntityFrameworkCore;
 using ProgrammingClub.DataContext;
 using ProgrammingClub.Helpers;
+using ProgrammingClub.Models.Validators;
 using ProgrammingClub.Repositories;
 using ProgrammingClub.Services;
 
@@ -87,6 +90,10 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             IssuerSigningKey = new Microsoft.IdentityModel.Tokens.SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(builder.Configuration["JWT:Key"]))
         };
     });
+
+builder.Services.AddValidatorsFromAssemblyContaining<MembershipTypeValidator>();
+builder.Services.AddFluentValidationAutoValidation();
+
 var app = builder.Build();
 
 app.UseMiddleware<ProgrammingClub.Middleware.CorrelationMiddleware>();
