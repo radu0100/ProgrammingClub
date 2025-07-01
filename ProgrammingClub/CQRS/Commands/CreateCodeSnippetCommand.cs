@@ -5,8 +5,8 @@ namespace ProgrammingClub.CQRS.Commands
 {
     public class CreateCodeSnippetCommand : IRequest<Guid>
     {
-        public CodeSnippetDTO Dto { get; set; }
-        public CreateCodeSnippetCommand(CodeSnippetDTO dto)
+        public CodeSnippetDto Dto { get; set; }
+        public CreateCodeSnippetCommand(CodeSnippetDto dto)
         {
             Dto = dto;
         }

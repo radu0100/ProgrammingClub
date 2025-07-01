@@ -44,7 +44,7 @@ namespace ProgrammingClub.Controllers
 
         // POST api/<CodeSnippetController>/3
         [HttpPost]
-        public async Task<IActionResult> CreateCodeSnippet(CodeSnippetDTO dto)
+        public async Task<IActionResult> CreateCodeSnippet(CodeSnippetDto dto)
         {
             var command = new CreateCodeSnippetCommand(dto);
             var CodeSnippetId = await _mediator.Send(command);

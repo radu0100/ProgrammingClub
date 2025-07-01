@@ -1,4 +1,5 @@
-﻿C:\Users\iradu\source\repos\ProgrammingClubSolution\ProgrammingClub.UnitTests\Controllers.Integration\MembersControllerTests.cs
+﻿C:\Users\iradu\source\repos\ProgrammingClubSolution\ProgrammingClub.UnitTests\Controllers.Integration\AnnouncementControllerTests.cs
+C:\Users\iradu\source\repos\ProgrammingClubSolution\ProgrammingClub.UnitTests\Controllers.Integration\MembersControllerTests.cs
 C:\Users\iradu\source\repos\ProgrammingClubSolution\ProgrammingClub.UnitTests\Helpers\DBContextHelper.cs
 C:\Users\iradu\source\repos\ProgrammingClubSolution\ProgrammingClub.UnitTests\Models\BuilderBase.cs
 C:\Users\iradu\source\repos\ProgrammingClubSolution\ProgrammingClub.UnitTests\Models\Builders\AnnouncementBuilder.cs

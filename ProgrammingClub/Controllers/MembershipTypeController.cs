@@ -44,7 +44,7 @@ namespace ProgrammingClub.Controllers
 
         // POST api/<MembershipTypeController>/3
         [HttpPost]
-        public async Task<IActionResult> CreateMembershipType(MembershipTypeDTO dto)
+        public async Task<IActionResult> CreateMembershipType(MembershipTypeDto dto)
         {
             var command = new CreateMembershipTypeCommand(dto);
             var membershipTypeId = await _mediator.Send(command);

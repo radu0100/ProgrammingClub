@@ -1,6 +1,6 @@
 ﻿namespace ProgrammingClub.CQRS.DTOs
 {
-    public class CodeSnippetDTO
+    public class CodeSnippetDto
     {
         public string? Title { get; set; }
         public Guid? ContentCode { get; set; }

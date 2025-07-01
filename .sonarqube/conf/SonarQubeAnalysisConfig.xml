@@ -8,9 +8,9 @@
   <ScanAllAnalysis>true</ScanAllAnalysis>
   <HasBeginStepCommandLineCredentials>true</HasBeginStepCommandLineCredentials>
   <HasBeginStepCommandLineTruststorePassword>false</HasBeginStepCommandLineTruststorePassword>
-  <SonarQubeHostUrl>http://localhost:9000</SonarQubeHostUrl>
+  <SonarQubeHostUrl>http://localhost:9060</SonarQubeHostUrl>
   <SonarQubeVersion>25.6.0.109173</SonarQubeVersion>
-  <SonarProjectKey>Test</SonarProjectKey>
+  <SonarProjectKey>ProgrammingClub</SonarProjectKey>
   <AdditionalConfig>
     <ConfigSetting Id="BuildUri" />
     <ConfigSetting Id="TfsUri" />
@@ -143,11 +143,11 @@
     <Property Name="sonaranalyzer-vbnet.pluginKey">vbnet</Property>
     <Property Name="sonar.java.jvmframeworkconfig.activate">true</Property>
     <Property Name="sonar.updatecenter.url">https://downloads.sonarsource.com/sonarqube/update/update-center.properties</Property>
-    <Property Name="sonar.core.startTime">6/27/2025 2:08:25 PM</Property>
     <Property Name="sonar.core.id">147B411E-AZexExR4kVhjeo0MxNgN</Property>
+    <Property Name="sonar.core.startTime">6/29/2025 3:54:42 PM</Property>
   </ServerSettings>
   <LocalSettings>
-    <Property Name="sonar.host.url">http://localhost:9000</Property>
+    <Property Name="sonar.host.url">http://localhost:9060</Property>
   </LocalSettings>
   <ScannerOptsSettings />
   <AnalyzersSettings>

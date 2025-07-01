@@ -1,6 +1,6 @@
 ﻿namespace ProgrammingClub.CQRS.DTOs
 {
-    public class MembershipTypeDTO
+    public class MembershipTypeDto
     {
         public string? Name { get; set; }
         public string? Description { get; set; }
