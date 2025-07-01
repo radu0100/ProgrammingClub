@@ -22,7 +22,7 @@ namespace Authentication.Controllers
         [HttpPost]
         [Route("register")]
         [MapToApiVersion("3.0")]
-        public async Task<IActionResult> Register([FromBody] RegisterRequestDTO user)
+        public async Task<IActionResult> Register([FromBody] RegisterRequestDto user)
         {
             var identityUser = new IdentityUser
             {
@@ -50,7 +50,7 @@ namespace Authentication.Controllers
         [HttpPost]
         [Route("login")]
         [MapToApiVersion("3.0")]
-        public async Task<IActionResult> Login([FromBody] LoginRequestDTO loginRequest)
+        public async Task<IActionResult> Login([FromBody] LoginRequestDto loginRequest)
         {
             var identityUser = await _userManager.FindByNameAsync(loginRequest.Username);
             if (identityUser != null)
@@ -61,7 +61,7 @@ namespace Authentication.Controllers
                     var roles = await _userManager.GetRolesAsync(identityUser);
 
                     var token = _tokenService.CreateToken(identityUser, roles.ToList());
-                    var response = new LoginRequestDTO
+                    var response = new LoginRequestDto
                     {
                         Token = token
                     };

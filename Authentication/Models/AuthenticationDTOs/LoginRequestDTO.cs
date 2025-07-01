@@ -2,7 +2,7 @@
 
 namespace Authentication.Models.AuthenticationDTOs
 {
-    public class LoginRequestDTO
+    public class LoginRequestDto
     {
         [Required]
         [DataType(DataType.EmailAddress)]
