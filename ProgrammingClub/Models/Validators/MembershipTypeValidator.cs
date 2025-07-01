@@ -1,6 +1,7 @@
 ﻿using FluentValidation;
 using ProgrammingClub.CQRS.DTOs;
 
+
 namespace ProgrammingClub.Models.Validators
 {
     public class MembershipTypeValidator : AbstractValidator<MembershipTypeDto>

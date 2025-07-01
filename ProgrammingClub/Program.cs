@@ -107,7 +107,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI(options =>
     {
         foreach (var item in versionDescriptionsProvider.ApiVersionDescriptions)
-
         {
             options.SwaggerEndpoint($"/swagger/{item.GroupName}/swagger.json", item.GroupName.ToUpperInvariant());
         }

@@ -16,7 +16,6 @@ namespace ProgrammingClub.CQRS.Handlers
             _context = context;
         }
 
-
         public async Task<Guid> Handle(CreateMembershipTypeCommand request, CancellationToken cancellationToken)
         {
             var existingMembershipType = await _context.MembershipTypes
